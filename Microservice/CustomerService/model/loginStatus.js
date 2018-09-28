@@ -8,7 +8,7 @@ var loginStatusSchema = new mongoose.Schema({
 
 }, {
 	timestamps: { createdAt: 'created_date', updatedAt: 'updated_date' },
-	collection: "login_status"
+	collection: "login-status"
 });
 
 module.exports = mongoose.model('loginStatusModel', loginStatusSchema);
