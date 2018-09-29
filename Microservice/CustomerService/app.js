@@ -4,7 +4,7 @@ var dbHandler = require('./handlers/dbHandler')
 var mongoConfig = require('./config/constants')
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
-dbHandler.connect(mongoConfig.mongodb, (err) => {
+dbHandler.connect(mongoConfig.mongodb, (err,connection) => {
     if (err) {
       console.log("Error in connecting to Database:"+ err)
       process.exit(1);

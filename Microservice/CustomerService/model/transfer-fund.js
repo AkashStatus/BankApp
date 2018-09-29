@@ -7,7 +7,7 @@ var transferFundSchema = new mongoose.Schema({
     to_user_id: {type: String, required: true},
     from_account: {type: String, required: true},
     to_account: {type: String, required: true},
-    transferred_amount: Number,
+    transferred_amount: Number
 }, {
 	timestamps: { createdAt: 'created_date', updatedAt: 'updated_date' },
 	collection: "fund-transfers"

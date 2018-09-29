@@ -38,7 +38,7 @@ router.post('/users/accounts/login',function(req,res){
           }
           else{
             console.log('Cant login User. user_id or password mismatches')
-            res.status(400).send('Please provide correct user_id and password')
+            res.status(400).send('Please provide correct id and password')
           }
         }
         else{

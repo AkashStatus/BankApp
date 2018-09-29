@@ -88,7 +88,7 @@ router.get('/users/:userId/accounts/balance',function(req,res){
 })
 
 
-router.post('/users/:userId/interest',function(req,res){
+router.post('/users/interest',function(req,res){
     /** Assuming 4 % interest is given on quarterly bases.*/
     
     if(!req.body.date){
@@ -101,7 +101,7 @@ router.post('/users/:userId/interest',function(req,res){
            var startDate = moment(new Date())
            var endDate = moment(req.body.date)
            day_difference = endDate.diff(startDate , "days")
-           accountModel.findOne({user_id: req.params.userId},function(err,user){
+           accountModel.findOne({user_id: req.body.userId},function(err,user){
               if(err){
                   console.log('Internal Server Error'+err)
                   res.status(500).send('Internal Server Error')
