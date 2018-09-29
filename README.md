@@ -54,9 +54,9 @@ Note: I dint save user's Session.
 
 In Request Body send me ObjectId of registered User with his password that he sets at time of registration . Login Api will validate with both(ObjectId & password). If matches you will be logged in else user will get a simple response as **Please provide correct id and password** .
 
-###Adding & Deleting beneficiary Flow & Api
+### Adding & Deleting beneficiary Flow & Api
 
-### beneficiary-users collection 
+#### beneficiary-users collection 
 - user_id:                      
 - beneficiary_user_id:          *ObjectId of user to whom user is adding as beneficiary*
 - first_name:
@@ -73,7 +73,7 @@ In Request Body send me ObjectId of registered User with his password that he se
         find in DB with given beneficiaryId , if exists delete him.
     ```
 
-###Transaction Flow & API
+### Transaction Flow & API
 
 #### transactions collection
  - user_id: String,     *ObjectId of User who makes transaction*
@@ -104,9 +104,9 @@ In Request Body send me ObjectId of registered User with his password that he se
    2. send the found transaction array in response body
 
 
-###Fund-transfer Flow And Api
+### Fund-transfer Flow And Api
   
-####fund-transfers collection
+#### fund-transfers collection
    - from_user_id:  {type: String, required: true},
    - to_user_id: {type: String, required: true},
    - from_account: {type: String, required: true},
@@ -125,19 +125,21 @@ In Request Body send me ObjectId of registered User with his password that he se
  **NOTE: At any point if fund transfer fails, Rollback the transaction**     
 
 
-####Check Balance & Calculating interest
-  
+#### Check Balance & Calculating interest
+ 
    **1. get user account balance by userId**
-     Steps: 
+  ``` Steps: 
      1. find the user's account details in accounts collection based on userId coming in request params.
-     2. if found, return only net_balance
+     2. if found, return only net_balance.
+  ```
+  
    **2. Calculating Interest at Base interest rate 4% for future dates**
-     *Assumptions: 1. I assumed that 4% interest is given quarterly*
+  ``` *Assumptions: 1. I assumed that 4% interest is given quarterly*
                   *2. I assumed that date will be given in "2018-11-04" this format*
      Steps: 
      1. find the user's account info from account collection based on userId coming in request body
      2. calculate interest for given date
      3. return the result in response body
-
+   ```
  
 
