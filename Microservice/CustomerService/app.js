@@ -18,7 +18,7 @@ app.use('/v1',require('./routes/user'))
 app.use('/v1',require('./routes/login'))
 app.use('/v1',require('./routes/beneficiary'))
 app.use('/v1',require('./routes/transaction'))
-
+app.use('/v1',require('./routes/transfer-fund'))
 var listener = app.listen(8080,()=>{
    console.log("App is running on port: "+listener.address().port)
 })
