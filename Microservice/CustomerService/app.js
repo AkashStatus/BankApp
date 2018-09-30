@@ -4,6 +4,7 @@ var dbHandler = require('./handlers/dbHandler')
 var mongoConfig = require('./config/constants')
 var bodyParser = require('body-parser')
 app.use(bodyParser.json())
+
 dbHandler.connect(mongoConfig.mongodb, (err,connection) => {
     if (err) {
       console.log("Error in connecting to Database:"+ err)
@@ -12,7 +13,6 @@ dbHandler.connect(mongoConfig.mongodb, (err,connection) => {
       console.log('Connected to the Database...');
     }
   });
-
 
 app.use('/v1',require('./routes/user')) 
 app.use('/v1',require('./routes/login'))
@@ -24,6 +24,5 @@ var listener = app.listen(9000,()=>{
 })
 
 app.get('/',function(req,res){
-
-  res.status(200).send("Bank App is Running")
+   res.status(200).send("Bank App is Running")
 })
