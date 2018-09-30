@@ -20,23 +20,23 @@ MongoDb Configuration : path to file (workSpaceFolder/Microservice/CustomerServi
 
 ## API End Points 
 - Create User Account 
-    *POST  /v1/users/accounts*
+    - **POST  /v1/users/accounts**
 - Add beneficiary
-    *POST /v1/users/beneficiary*
+    - **POST /v1/users/beneficiary**
 - Delete beneficiary by beneficiaryId
-    *DELETE /v1/users/:userId/beneficiary/:beneficiaryId*
+    - **DELETE /v1/users/:userId/beneficiary/:beneficiaryId**
 - Create transaction 
-    *POST /v1/users/transaction*
+    - **POST /v1/users/transactions**
 -  Get Transaction by transactionId
-    *GET /v1/users/:userId/transactions/:transactionId*
+    - **GET /v1/users/:userId/transactions/:transactionId**
 - Get All transaction of user
-    *GET /v1/users/userId/transactions*
+    - **GET /v1/users/userId/transactions**
 - Transfer-Fund
-    *POST /v1/users/fund/transfer*
+    - **POST /v1/users/fund/transfer**
 - GET User's Account Balance
-    *GET /v1/users/userId/accounts/balance*
+    - **GET /v1/users/userId/accounts/balance**
 - Calculate Interest for future Date
-    *POST /v1/users/interest*
+    - **POST /v1/users/interest**
 
 
 ### Registration Flow & Api
