@@ -5,15 +5,17 @@
 - MongoDb - Used as Db for storing all application States
 
 # Getting and Starting Application
- ###Steps
+
+  #### Steps
    - 1. Use Command : git clone https://github.com/AkashStatus/BankApp.git
    - 2. navigate to /WorkSapaceFolder/Microservice/CustomerService and run  **npm install**  and **npm start**
 
-#Basic Information about App
 
-####I have Added console.log() inside every Api to get to know what is happening inside Api.
+# Basic Information about App
 
-####MongoDb Configuration : path to file (workSpaceFolder/Microservice/CustomerService/config/contants.js)
+I have Added console.log() inside every Api to get to know what is happening inside Api.
+
+MongoDb Configuration : path to file (workSpaceFolder/Microservice/CustomerService/config/contants.js)
 
 ### Registration Flow & Api
 Since there is no info in Documentation for User Registration , so i assumed that i will be getting following data in **Request Body** at the time of user Registration
