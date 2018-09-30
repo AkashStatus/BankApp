@@ -21,7 +21,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
        var fundTransferObject = null;
       async.waterfall([
           (callback)=>{
-            transferFundModel(req.body).save((result)=>{
+            transferFundModel(req.body).save((err,result)=>{
                 if(err){
                     console.log('error while saving in fund-transfer model'+err)
                     callback({status : 500,
@@ -137,7 +137,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
               }
           })
           }
-      ],(err,transaction)=>{
+      ],(error,transaction)=>{
           if(error){
               console.log("Error in amount transfer")
               transferFundModel.remove({_id: fundTransferObject._id},(err,result)=>{
