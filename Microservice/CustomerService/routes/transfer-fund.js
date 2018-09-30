@@ -65,7 +65,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
             transactionModel(transactionObject).save((err,transaction)=>{
                 if(err){
                     console.log('Error in saving transaction')
-                    rollBackTransaction(req,'fail_transaction_on_withdrawal',null,null,null,null,function(err){
+                    rollBackTransaction(req,'fail_transaction_on_withdrawal',null,null,function(err){
                             callback(err)
                     })
                 }
@@ -87,7 +87,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
                     account.net_balance = account.net_balance + req.body.transferred_amount
                     accountModel.updateOne({user_id: req.body.to_user_id},account,function(err,result){
                         if(err){
-                            rollBackTransaction(req,null,'fail_transfer_on_deposit',null,transaction._id,null,function(err){
+                            rollBackTransaction(req,'fail_transfer_on_deposit',transaction._id,null,function(err){
                                  callback(err)
                             })
                         }
@@ -105,7 +105,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
                     }
                 })
           },
-          (OldTransaction, callback)=>{
+          (oldTransaction, callback)=>{
             var transactionObject ={
                 is_transferred: true, 
                 user_id: req.body.to_user_id,
@@ -115,7 +115,7 @@ router.post('/users/accounts/fund/transfer',function(req,res){
           transactionModel(transactionObject).save((err,transaction)=>{
               if(err){
                   console.log('Error in saving transaction')
-                  rollBackTransaction(req,null,null,'fail_transaction_on_deposit',OldTransaction._id,transaction._id,function(err){
+                  rollBackTransaction(req,'fail_transaction_on_deposit',oldTransaction._id,transaction._id,function(err){
                           callback(err)
                   })
               }
@@ -139,14 +139,13 @@ router.post('/users/accounts/fund/transfer',function(req,res){
    }
 })
 
-function rollBackTransaction(req,failTransactionOnWithdrawal,failTransferOnDeposit,failTransactionOnDeposit,
-    transactionId,newTransactionId,callback){
-    if(failTransactionOnWithdrawal === 'fail_transaction_on_withdrawal'){
+function rollBackTransaction(req,rollbackType, transactionId,newTransactionId,callback){
+    if(rollbackType === 'fail_transaction_on_withdrawal'){
         findAndUpdateUser(req.body.from_user_id,null,function(err,something){
                  callback(err)
         })
       }          
-    if(failTransferOnDeposit === 'fail_transfer_on_deposit'){
+    if(rollbackType === 'fail_transfer_on_deposit'){
                 findAndUpdateUser(req.body.from_user_id,null,function(err,something){
                     if(err){
                         callback(err)
@@ -170,7 +169,7 @@ function rollBackTransaction(req,failTransactionOnWithdrawal,failTransferOnDepos
             }
      })
    }
-   if(failTransactionOnDeposit === 'fail_transaction_on_deposit'){
+   if(rollbackType === 'fail_transaction_on_deposit'){
     findAndUpdateUser(req.body.from_user_id,null,function(err,something){
          if(err){
             callback(err)
