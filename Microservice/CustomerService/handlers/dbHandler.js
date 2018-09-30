@@ -21,7 +21,7 @@ function connect(dbconfig,callback) {
     db.on('disconnected', function() {
         console.log('MongoDB disconnected! ')
     });
-    database = mongoose.createConnection(connectionString, { server: { poolSize: 10 }},(err,connection)=>{
+    database = mongoose.connect(connectionString,dbconfig.options,(err,connection)=>{
              if(err)return callback(err)
              else{
                  return callback(null,connection)

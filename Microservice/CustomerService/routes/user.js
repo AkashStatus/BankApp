@@ -9,7 +9,7 @@ router.post('/users/accounts',function(req,res){
        console.log("Request Body should contain first_name");
        res.status(400).send("Request Body should contain first_name")
     }
-    if(!req.body.unique_user_id){
+    else if(!req.body.unique_user_id){
         console.log("Request Body should contain user_id");
         res.status(400).send("Request Body should contain user_id")
      }
@@ -22,7 +22,6 @@ router.post('/users/accounts',function(req,res){
         res.status(400).send("Request Body should contain account_no")
     }
     else {
-    var userBody = req.body
     userModel.findOne({unique_user_id: req.body.unique_user_id},function(err,result){
     if(err){
         console.log('Some Error Occurred')

@@ -6,6 +6,7 @@ var mongodb= {
     "password": "akash1234",
     "options": {
         "server":{
+            "poolSize": 5,
             "auto_reconnect": true,
             "reconnectTries":360,
             "reconnectInterval": 10000

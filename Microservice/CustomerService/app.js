@@ -11,18 +11,17 @@ dbHandler.connect(mongoConfig.mongodb, (err,connection) => {
       process.exit(1);
     } else {
       console.log('Connected to the Database...');
+      var listener = app.listen(9000,()=>{
+        console.log("App is running on port: "+listener.address().port)
+     })
     }
   });
 
+app.get('/',function(req,res){
+    res.status(200).send("Bank App is Running")
+ })
 app.use('/v1',require('./routes/user')) 
 app.use('/v1',require('./routes/login'))
 app.use('/v1',require('./routes/beneficiary'))
 app.use('/v1',require('./routes/transaction'))
 app.use('/v1',require('./routes/transfer-fund'))
-var listener = app.listen(9000,()=>{
-   console.log("App is running on port: "+listener.address().port)
-})
-
-app.get('/',function(req,res){
-   res.status(200).send("Bank App is Running")
-})
