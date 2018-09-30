@@ -17,6 +17,28 @@ I have Added console.log() inside every Api to get to know what is happening ins
 
 MongoDb Configuration : path to file (workSpaceFolder/Microservice/CustomerService/config/contants.js)
 
+
+## API End Points 
+- Create User Account 
+    *POST  /v1/users/accounts*
+- Add beneficiary
+    *POST /v1/users/beneficiary*
+- Delete beneficiary by beneficiaryId
+    *DELETE /v1/users/:userId/beneficiary/:beneficiaryId*
+- Create transaction 
+    *POST /v1/users/transaction*
+-  Get Transaction by transactionId
+    *GET /v1/users/:userId/transactions/:transactionId*
+- Get All transaction of user
+    *GET /v1/users/userId/transactions*
+- Transfer-Fund
+    *POST /v1/users/fund/transfer*
+- GET User's Account Balance
+    *GET /v1/users/userId/accounts/balance*
+- Calculate Interest for future Date
+    *POST /v1/users/interest*
+
+
 ### Registration Flow & Api
 Since there is no info in Documentation for User Registration , so i assumed that i will be getting following data in **Request Body** at the time of user Registration
 - first_name: 
