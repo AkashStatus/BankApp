@@ -7,7 +7,7 @@
 # Getting and Starting Application
  ###Steps
    - 1. Use Command : git clone https://github.com/AkashStatus/BankApp.git
-   - 2. navigate to /WorkSapaceFolder/Microservice/CustomerService and run **npm start**
+   - 2. navigate to /WorkSapaceFolder/Microservice/CustomerService and run  **npm install**  and **npm start**
 
 #Basic Information about App
 
