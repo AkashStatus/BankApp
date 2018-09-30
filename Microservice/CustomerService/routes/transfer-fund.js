@@ -18,42 +18,54 @@ router.post('/users/accounts/fund/transfer',function(req,res){
     res.status(400).send("Request Body should contain from_account")
    }
    else {
+       var fundTransferObject = null;
       async.waterfall([
           (callback)=>{
-            accountModel.findOne({user_id: req.body.from_user_id},function(err,account){
+            transferFundModel(req.body).save((result)=>{
                 if(err){
+                    console.log('error while saving in fund-transfer model'+err)
                     callback({status : 500,
-                    message: 'Internal Server Error'
-                    })
-                  }
-                  else if(account){
-                    account= JSON.parse(JSON.stringify(account));
-                    if( account.net_balance >= req.body.transferred_amount){
-                        account.net_balance = account.net_balance - req.body.transferred_amount
-                        accountModel.updateOne({user_id: req.body.from_user_id},account,function(err,result){
-                            if(err){
-                                callback({status : 500,
-                                    message: 'Internal Server Error'
+                        message: 'Internal Server Error'
+                     })
+                 }
+                 else{
+                    fundTransferObject=result;
+                    accountModel.findOne({user_id: req.body.from_user_id},function(err,account){
+                        if(err){
+                            callback({status : 500,
+                            message: 'Internal Server Error'
+                            })
+                          }
+                          else if(account){
+                            account= JSON.parse(JSON.stringify(account));
+                            if( account.net_balance >= req.body.transferred_amount){
+                                account.net_balance = account.net_balance - req.body.transferred_amount
+                                accountModel.updateOne({user_id: req.body.from_user_id},account,function(err,result){
+                                    if(err){
+                                        callback({status : 500,
+                                            message: 'Internal Server Error'
+                                        })
+                                    }
+                                    else{
+                                        console.log('amount is deducted from user account')
+                                        callback(null ,'success')
+                                    }
+                                })
+                            } 
+                            else{
+                                callback({status: 400,
+                                message: 'you dont have sufficient amount to transfer'})
+                            }
+                          }
+                         else{
+                             console.log('No account is associated with from_user_id')
+                             callback({status : 400,
+                                message: 'No account is associated with from_user_id'
                                 })
                             }
-                            else{
-                                console.log('amount is deducted from user account')
-                                callback(null ,'success')
-                            }
-                        })
-                    } 
-                    else{
-                        callback({status: 400,
-                        message: 'you dont have sufficient amount to transfer'})
-                    }
+                        })  
                   }
-                 else{
-                     console.log('No account is associated with from_user_id')
-                     callback({status : 400,
-                        message: 'No account is associated with from_user_id'
-                        })
-                    }
-                }) 
+             }) 
           },
           (success,callback )=>{
               var transactionObject ={
@@ -126,14 +138,21 @@ router.post('/users/accounts/fund/transfer',function(req,res){
           })
           }
       ],(err,transaction)=>{
-          if(err){
+          if(error){
               console.log("Error in amount transfer")
-              res.status(err.status).send(err.message)
+              transferFundModel.remove({_id: fundTransferObject._id},(err,result)=>{
+                if(err){
+                    console.log('Error Occured while deleting fundTransferObject')
+                    res.status(500).send('Internal Server Error')
+                }
+                else{
+                    res.status(error.status).send(error.message)
+                }
+              })
+             
           }
           else{
-            transferFundModel(req.body).save((result)=>{
               res.status(200).send('Amount Transferred Successfully')
-            })
           }
       })
    }
@@ -210,7 +229,7 @@ function rollBackTransaction(req,rollbackType, transactionId,newTransactionId,ca
  }
 }
 
-function findAndUpdateUser(userId,deductAmountFromLastUser,failOnDeposit){
+function findAndUpdateUser(userId,deductAmountFromLastUser,callback){
     accountModel.findOne({user_id: userId},function(err,account){
         if(err){
            console.log('Internal Server Error' +err)
