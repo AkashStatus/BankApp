@@ -89,7 +89,10 @@ router.get('/users/:userId/accounts/balance',function(req,res){
 
 router.post('/users/interest',function(req,res){
     /** Assuming 4 % interest is given on quarterly bases.*/
-    
+    if(!req.body.userId){
+        console.log('Please provide userId in request body')
+        res.status(400).send('Please provide userId in request body')
+ }
     if(!req.body.date){
            console.log('Please provide date in request body')
            res.status(400).send('Please provide date in request body')
