@@ -92,8 +92,8 @@ router.post('/users/interest',function(req,res){
     if(!req.body.userId){
         console.log('Please provide userId in request body')
         res.status(400).send('Please provide userId in request body')
- }
-    if(!req.body.date){
+    }
+    else if(!req.body.date){
            console.log('Please provide date in request body')
            res.status(400).send('Please provide date in request body')
     }

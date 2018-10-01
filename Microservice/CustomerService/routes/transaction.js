@@ -105,7 +105,7 @@ router.get('/users/:userId/transactions',function(req,res){
           res.status(200).send(transactionList);
        }
        else{
-           res.status(404).send('No transaction was found for userId',req.params.userId)
+           res.status(404).send('No transaction was found for userId')
        }
    })
 })
@@ -121,7 +121,7 @@ router.get('/users/:userId/transactions/:transactionId',function(req,res){
           res.status(200).send(transaction);
        }
        else{
-           res.status(404).send('No transaction was found for transactionId',req.params.transactionId)
+           res.status(404).send('No transaction was found for transactionId')
        }
    })
 })
