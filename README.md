@@ -125,19 +125,19 @@ In Request Body send me ObjectId of registered User with his password that he se
  - is_deposited: {type: Boolean ,default: false},
  - is_withdrawal: {type: Boolean, default: false}
 
-###transaction Api     (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
+### transaction Api     (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
 
-  ####Add transaction   (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
+  #### Add transaction   (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
    Steps : 
    1. take the details from request Body and save it in transaction Collection
    2. Now find the net_balance in account collection and update it with transaction amount
 
-  ####get transaction by transaction id (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
+  #### Get transaction by transaction id (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
    Steps: 
    1. find the transaction from transaction collection belonging to transaction id
    2. send the found transaction in response body
 
-  ####Delete Transaction belonging to a user  (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
+  #### Delete Transaction belonging to a user  (path to file : workSpaceFolder/Microservice/CustomerService/routes/transaction.js)
    Steps: 
    1. find the transaction from transaction collection belonging to transaction id
    2. send the found transaction array in response body
@@ -173,12 +173,17 @@ In Request Body send me ObjectId of registered User with his password that he se
   ```
   
 #### 2. Calculate Interest at Base interest rate 4% for future dates (path to file :workSpaceFolder/Microservice/CustomerService/routes/user.js)
-  ``` *Assumptions: 1. I assumed that 4% interest is given quarterly*
-                  *2. I assumed that date will be given in "2018-11-04" this format*
-     Steps: 
-     1. find the user's account info from account collection based on userId coming in request body
-     2. calculate interest for given date
-     3. return the result in response body
+  ``` 
+  Assumptions: 
+  - 1. I assumed that 4% interest is given quarterly
+  - 2. I assumed that date will be given in "2018-11-04" this format
+  Steps: 
+  -  1. find the user's account info from account collection based on userId coming in request body
+  -  2. calculate interest for given date
+  -  3. return the result in response body
    ```
  
 
+## AWS EC2 Link : 
+I hosted application on EC2 ubuntu instance .Click on below link to check running application. 
+#### http://ec2-13-233-93-50.ap-south-1.compute.amazonaws.com:9000
