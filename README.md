@@ -30,7 +30,7 @@ MongoDb Configuration : path to file (workSpaceFolder/Microservice/CustomerServi
 -  Get Transaction by transactionId
     - **GET /v1/users/:userId/transactions/:transactionId**
 - Get All transaction of user
-    - **GET /v1/users/userId/transactions**
+    - **GET /v1/users/:userId/transactions**
 - Transfer-Fund
     - **POST /v1/users/fund/transfer**
 - GET User's Account Balance
