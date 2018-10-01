@@ -166,13 +166,13 @@ In Request Body send me ObjectId of registered User with his password that he se
 
 ### Check Balance & Calculating interest
  
-####1. get user account balance by userId  (path to file : workSpaceFolder/Microservice/CustomerService/routes/user.js)
+#### 1. get user account balance by userId  (path to file : workSpaceFolder/Microservice/CustomerService/routes/user.js)
   ``` Steps: 
      1. find the user's account details in accounts collection based on userId coming in request params.
      2. if found, return only net_balance.
   ```
   
-####2. Calculating Interest at Base interest rate 4% for future dates (path to file :workSpaceFolder/Microservice/CustomerService/routes/user.js)
+#### 2. Calculate Interest at Base interest rate 4% for future dates (path to file :workSpaceFolder/Microservice/CustomerService/routes/user.js)
   ``` *Assumptions: 1. I assumed that 4% interest is given quarterly*
                   *2. I assumed that date will be given in "2018-11-04" this format*
      Steps: 
